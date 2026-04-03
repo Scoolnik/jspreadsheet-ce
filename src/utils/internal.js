@@ -217,7 +217,7 @@ export const executeFormula = function (expression, x, y) {
                         }
                         // Type!
                         if (('' + value).trim() == '') {
-                            delete formulaExpressions[t];
+                            formulaExpressions[t] = null;
                         } else {
                             if (value == Number(value) && obj.parent.config.autoCasting != false) {
                                 // Number
