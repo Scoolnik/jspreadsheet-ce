@@ -132,7 +132,7 @@ const createTable = function () {
     // Colsgroup
     obj.colgroupContainer = document.createElement('colgroup');
     let tempCol = document.createElement('col');
-    tempCol.setAttribute('width', '50');
+    tempCol.setAttribute('width', obj.options.rowHeaderWidth || '50');
     obj.colgroupContainer.appendChild(tempCol);
 
     // Nested

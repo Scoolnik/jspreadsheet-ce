@@ -6670,16 +6670,6 @@ const hideColumn = function (colNumber) {
 };
 
 /**
- * Hide multiple columns (alias for hideColumn)
- */
-const hideColumns = (/* unused pure expression or super */ null && (hideColumn));
-
-/**
- * Show multiple columns (alias for showColumn)
- */
-const showColumns = (/* unused pure expression or super */ null && (showColumn));
-
-/**
  * Get a column data by columnNumber
  */
 const getColumnData = function (columnNumber, processed) {
@@ -10129,7 +10119,7 @@ const createTable = function () {
     // Colsgroup
     obj.colgroupContainer = document.createElement('colgroup');
     let tempCol = document.createElement('col');
-    tempCol.setAttribute('width', '50');
+    tempCol.setAttribute('width', obj.options.rowHeaderWidth || '50');
     obj.colgroupContainer.appendChild(tempCol);
 
     // Nested
