@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "There is a conflict with another merged cell",
     "invalidMergeProperties": "Invalid merged properties",
     "cellAlreadyMerged": "Cell already merged",
-    "noCellsSelected": "No cells selected"
+    "noCellsSelected": "No cells selected",
+    "hideSelectedColumns": "Hide selected columns",
+    "showHiddenColumns": "Show hidden columns",
+    "hideSelectedRows": "Hide selected rows",
+    "showHiddenRows": "Show hidden rows"
 }

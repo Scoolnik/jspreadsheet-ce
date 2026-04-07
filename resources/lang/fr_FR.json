@@ -28,5 +28,9 @@
     "thereIsAConflictWithAnotherMergedCell": "Il y a un conflit avec une autre cellule fusionnée",
     "invalidMergeProperties": "Propriétés de fusion invalides",
     "cellAlreadyMerged": "Cellule déjà fusionnée",
-    "noCellsSelected": "Aucune cellule sélectionnée"
+    "noCellsSelected": "Aucune cellule sélectionnée",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

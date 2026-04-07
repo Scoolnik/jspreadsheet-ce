@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "与其他合并单元格有冲突",
     "invalidMergeProperties": "无效的合并属性",
     "cellAlreadyMerged": "单元格已合并",
-    "noCellsSelected": "未选定单元格"
+    "noCellsSelected": "未选定单元格",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

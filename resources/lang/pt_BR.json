@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "Existe um conflito com outra celula mesclada",
     "invalidMergeProperties": "Propriedas de mesclagem inválidas",
     "cellAlreadyMerged": "A celula já está mesclada",
-    "noCellsSelected": "Nenhuma celula selecionada"
+    "noCellsSelected": "Nenhuma celula selecionada",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

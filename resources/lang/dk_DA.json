@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "Der er en konflikt med en anden forbundet celle.",
     "invalidMergeProperties": "Ugyldige forbundne egenskaber",
     "cellAlreadyMerged": "Celle allerede forbundet",
-    "noCellsSelected": "Ingen celler valgt"
+    "noCellsSelected": "Ingen celler valgt",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

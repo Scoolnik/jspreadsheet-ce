@@ -6585,6 +6585,27 @@ const setWidth = function (column, width, oldWidth) {
 };
 
 /**
+ * Update visual indicators on headers adjacent to hidden columns
+ */
+const updateHiddenColumnIndicators = function (obj) {
+    const headers = obj.headers;
+    let hidden = false;
+
+    for (let i = 0; i < headers.length; i++) {
+        const isHidden = headers[i].style.display === 'none';
+        headers[i].classList.toggle('jss_hidden_col_before', !isHidden && hidden);
+        hidden = isHidden;
+    }
+
+    hidden = false;
+    for (let i = headers.length - 1; i >= 0; i--) {
+        const isHidden = headers[i].style.display === 'none';
+        headers[i].classList.toggle('jss_hidden_col_after', !isHidden && hidden);
+        hidden = isHidden;
+    }
+};
+
+/**
  * Show column
  */
 const showColumn = function (colNumber) {
@@ -6612,6 +6633,7 @@ const showColumn = function (colNumber) {
         setFooter.call(obj);
     }
 
+    updateHiddenColumnIndicators(obj);
     obj.resetSelection();
 };
 
@@ -6643,8 +6665,19 @@ const hideColumn = function (colNumber) {
         setFooter.call(obj);
     }
 
+    updateHiddenColumnIndicators(obj);
     obj.resetSelection();
 };
+
+/**
+ * Hide multiple columns (alias for hideColumn)
+ */
+const hideColumns = (/* unused pure expression or super */ null && (hideColumn));
+
+/**
+ * Show multiple columns (alias for showColumn)
+ */
+const showColumns = (/* unused pure expression or super */ null && (showColumn));
 
 /**
  * Get a column data by columnNumber
@@ -7240,6 +7273,37 @@ const setHeight = function (row, height, oldHeight) {
 };
 
 /**
+ * Update visual indicators on rows adjacent to hidden rows
+ */
+const updateHiddenRowIndicators = function (obj) {
+    const rows = obj.rows;
+    let hidden = false;
+
+    for (let i = 0; i < rows.length; i++) {
+        const el = rows[i].element;
+        const isHidden = el.style.display === 'none';
+        el.classList.toggle('jss_hidden_row_before', !isHidden && hidden);
+        if (!isHidden) {
+            hidden = false;
+        } else {
+            hidden = true;
+        }
+    }
+
+    hidden = false;
+    for (let i = rows.length - 1; i >= 0; i--) {
+        const el = rows[i].element;
+        const isHidden = el.style.display === 'none';
+        el.classList.toggle('jss_hidden_row_after', !isHidden && hidden);
+        if (!isHidden) {
+            hidden = false;
+        } else {
+            hidden = true;
+        }
+    }
+};
+
+/**
  * Show row
  */
 const showRow = function (rowNumber) {
@@ -7252,6 +7316,8 @@ const showRow = function (rowNumber) {
     rowNumber.forEach(function (rowIndex) {
         obj.rows[rowIndex].element.style.display = '';
     });
+
+    updateHiddenRowIndicators(obj);
 };
 
 /**
@@ -7267,6 +7333,8 @@ const hideRow = function (rowNumber) {
     rowNumber.forEach(function (rowIndex) {
         obj.rows[rowIndex].element.style.display = 'none';
     });
+
+    updateHiddenRowIndicators(obj);
 };
 
 /**
@@ -8246,6 +8314,34 @@ const defaultContextMenu = function (worksheet, x, y, role) {
                 },
             });
         }
+
+        // Hide/Show columns
+        items.push({ type: 'line' });
+
+        items.push({
+            title: __WEBPACK_EXTERNAL_MODULE_jsuites_default__.translate('Hide selected columns'),
+            onclick: function () {
+                const selected = worksheet.getSelectedColumns();
+                worksheet.hideColumn(selected.length ? selected : [parseInt(x)]);
+            },
+        });
+
+        // Check for hidden columns
+        const hiddenCols = [];
+        for (let i = 0; i < worksheet.headers.length; i++) {
+            if (worksheet.headers[i].style.display === 'none') {
+                hiddenCols.push(i);
+            }
+        }
+
+        if (hiddenCols.length) {
+            items.push({
+                title: __WEBPACK_EXTERNAL_MODULE_jsuites_default__.translate('Show hidden columns'),
+                onclick: function () {
+                    worksheet.showColumn(hiddenCols);
+                },
+            });
+        }
     }
 
     if (role === 'row' || role === 'cell') {
@@ -8271,6 +8367,34 @@ const defaultContextMenu = function (worksheet, x, y, role) {
                 title: __WEBPACK_EXTERNAL_MODULE_jsuites_default__.translate('Delete selected rows'),
                 onclick: function () {
                     worksheet.deleteRow(worksheet.getSelectedRows().length ? undefined : parseInt(y));
+                },
+            });
+        }
+
+        // Hide/Show rows
+        items.push({ type: 'line' });
+
+        items.push({
+            title: __WEBPACK_EXTERNAL_MODULE_jsuites_default__.translate('Hide selected rows'),
+            onclick: function () {
+                const selected = worksheet.getSelectedRows();
+                worksheet.hideRow(selected.length ? selected : [parseInt(y)]);
+            },
+        });
+
+        // Check for hidden rows
+        const hiddenRows = [];
+        for (let i = 0; i < worksheet.rows.length; i++) {
+            if (worksheet.rows[i].element.style.display === 'none') {
+                hiddenRows.push(i);
+            }
+        }
+
+        if (hiddenRows.length) {
+            items.push({
+                title: __WEBPACK_EXTERNAL_MODULE_jsuites_default__.translate('Show hidden rows'),
+                onclick: function () {
+                    worksheet.showRow(hiddenRows);
                 },
             });
         }

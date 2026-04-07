@@ -557,6 +557,37 @@ export const setHeight = function (row, height, oldHeight) {
 };
 
 /**
+ * Update visual indicators on rows adjacent to hidden rows
+ */
+const updateHiddenRowIndicators = function (obj) {
+    const rows = obj.rows;
+    let hidden = false;
+
+    for (let i = 0; i < rows.length; i++) {
+        const el = rows[i].element;
+        const isHidden = el.style.display === 'none';
+        el.classList.toggle('jss_hidden_row_before', !isHidden && hidden);
+        if (!isHidden) {
+            hidden = false;
+        } else {
+            hidden = true;
+        }
+    }
+
+    hidden = false;
+    for (let i = rows.length - 1; i >= 0; i--) {
+        const el = rows[i].element;
+        const isHidden = el.style.display === 'none';
+        el.classList.toggle('jss_hidden_row_after', !isHidden && hidden);
+        if (!isHidden) {
+            hidden = false;
+        } else {
+            hidden = true;
+        }
+    }
+};
+
+/**
  * Show row
  */
 export const showRow = function (rowNumber) {
@@ -569,6 +600,8 @@ export const showRow = function (rowNumber) {
     rowNumber.forEach(function (rowIndex) {
         obj.rows[rowIndex].element.style.display = '';
     });
+
+    updateHiddenRowIndicators(obj);
 };
 
 /**
@@ -584,6 +617,8 @@ export const hideRow = function (rowNumber) {
     rowNumber.forEach(function (rowIndex) {
         obj.rows[rowIndex].element.style.display = 'none';
     });
+
+    updateHiddenRowIndicators(obj);
 };
 
 /**

@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "C'� un conflitto con un'altra cella unita",
     "invalidMergeProperties": "Propriet� di unione invalide",
     "cellAlreadyMerged": "Celle gi� unite",
-    "noCellsSelected": "Nessuna cella selezionata"
+    "noCellsSelected": "Nessuna cella selezionata",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

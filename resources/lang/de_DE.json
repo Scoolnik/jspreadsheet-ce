@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "Es liegt ein Konflikt mit einer anderen verbundenen Zelle vor",
     "invalidMergeProperties": "Eigenschaften zum Verbinden ungültig",
     "cellAlreadyMerged": "Zelle bereits verbunden",
-    "noCellsSelected": "Keine Zellen ausgewählt"
+    "noCellsSelected": "Keine Zellen ausgewählt",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

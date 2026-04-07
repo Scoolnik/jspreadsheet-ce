@@ -29,5 +29,9 @@
     "thereIsAConflictWithAnotherMergedCell": "Istnieje konflikt z inną scaloną komórką",
     "invalidMergeProperties": "Nieprawidłowe właściwości scalenia",
     "cellAlreadyMerged": "Komórka już scalona",
-    "noCellsSelected": "Nie wybrano żadnych komórek"
+    "noCellsSelected": "Nie wybrano żadnych komórek",
+    "hideSelectedColumns": "",
+    "showHiddenColumns": "",
+    "hideSelectedRows": "",
+    "showHiddenRows": ""
 }

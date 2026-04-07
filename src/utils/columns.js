@@ -635,6 +635,27 @@ export const setWidth = function (column, width, oldWidth) {
 };
 
 /**
+ * Update visual indicators on headers adjacent to hidden columns
+ */
+const updateHiddenColumnIndicators = function (obj) {
+    const headers = obj.headers;
+    let hidden = false;
+
+    for (let i = 0; i < headers.length; i++) {
+        const isHidden = headers[i].style.display === 'none';
+        headers[i].classList.toggle('jss_hidden_col_before', !isHidden && hidden);
+        hidden = isHidden;
+    }
+
+    hidden = false;
+    for (let i = headers.length - 1; i >= 0; i--) {
+        const isHidden = headers[i].style.display === 'none';
+        headers[i].classList.toggle('jss_hidden_col_after', !isHidden && hidden);
+        hidden = isHidden;
+    }
+};
+
+/**
  * Show column
  */
 export const showColumn = function (colNumber) {
@@ -662,6 +683,7 @@ export const showColumn = function (colNumber) {
         setFooter.call(obj);
     }
 
+    updateHiddenColumnIndicators(obj);
     obj.resetSelection();
 };
 
@@ -693,6 +715,7 @@ export const hideColumn = function (colNumber) {
         setFooter.call(obj);
     }
 
+    updateHiddenColumnIndicators(obj);
     obj.resetSelection();
 };
 

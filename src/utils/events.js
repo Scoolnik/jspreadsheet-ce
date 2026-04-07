@@ -932,6 +932,34 @@ const defaultContextMenu = function (worksheet, x, y, role) {
                 },
             });
         }
+
+        // Hide/Show columns
+        items.push({ type: 'line' });
+
+        items.push({
+            title: jSuites.translate('Hide selected columns'),
+            onclick: function () {
+                const selected = worksheet.getSelectedColumns();
+                worksheet.hideColumn(selected.length ? selected : [parseInt(x)]);
+            },
+        });
+
+        // Check for hidden columns
+        const hiddenCols = [];
+        for (let i = 0; i < worksheet.headers.length; i++) {
+            if (worksheet.headers[i].style.display === 'none') {
+                hiddenCols.push(i);
+            }
+        }
+
+        if (hiddenCols.length) {
+            items.push({
+                title: jSuites.translate('Show hidden columns'),
+                onclick: function () {
+                    worksheet.showColumn(hiddenCols);
+                },
+            });
+        }
     }
 
     if (role === 'row' || role === 'cell') {
@@ -957,6 +985,34 @@ const defaultContextMenu = function (worksheet, x, y, role) {
                 title: jSuites.translate('Delete selected rows'),
                 onclick: function () {
                     worksheet.deleteRow(worksheet.getSelectedRows().length ? undefined : parseInt(y));
+                },
+            });
+        }
+
+        // Hide/Show rows
+        items.push({ type: 'line' });
+
+        items.push({
+            title: jSuites.translate('Hide selected rows'),
+            onclick: function () {
+                const selected = worksheet.getSelectedRows();
+                worksheet.hideRow(selected.length ? selected : [parseInt(y)]);
+            },
+        });
+
+        // Check for hidden rows
+        const hiddenRows = [];
+        for (let i = 0; i < worksheet.rows.length; i++) {
+            if (worksheet.rows[i].element.style.display === 'none') {
+                hiddenRows.push(i);
+            }
+        }
+
+        if (hiddenRows.length) {
+            items.push({
+                title: jSuites.translate('Show hidden rows'),
+                onclick: function () {
+                    worksheet.showRow(hiddenRows);
                 },
             });
         }
