@@ -79,8 +79,18 @@
         "webpack-dev-server": "^4.15.1"
     },
     "main": "dist/index.js",
+    "module": "dist/index.esm.js",
     "types": "dist/index.d.ts",
-    "version": "5.0.4",
+    "exports": {
+        ".": {
+            "import": "./dist/index.esm.js",
+            "require": "./dist/index.js",
+            "default": "./dist/index.js"
+        },
+        "./dist/jspreadsheet.css": "./dist/jspreadsheet.css",
+        "./dist/jspreadsheet.themes.css": "./dist/jspreadsheet.themes.css"
+    },
+    "version": "5.0.4-7",
     "bugs": "https://github.com/jspreadsheet/ce/issues",
     "homepage": "https://github.com/jspreadsheet/ce",
     "download": "https://github.com/jspreadsheet/ce/archive/master.zip",

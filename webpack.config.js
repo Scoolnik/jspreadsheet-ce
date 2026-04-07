@@ -41,19 +41,24 @@ if (! formula && typeof(require) === 'function') {
 
 let isProduction = process.env.NODE_ENV === 'production';
 
-const webpack = {
+const distPath = path.resolve(__dirname, 'dist');
+
+const sharedConfig = {
+    stats: { warnings: false },
+};
+
+const umdConfig = {
+    ...sharedConfig,
+    optimization: { minimize: true },
     target: ['web', 'es5'],
     entry: isProduction ? './src/index' : './src/test.js',
     mode: isProduction ? 'production' : 'development',
     externals: {},
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: distPath,
         library: 'jspreadsheet',
         libraryExport: 'default',
-    },
-    optimization: {
-        minimize: true,
     },
     devServer: {
         static: {
@@ -90,18 +95,46 @@ const webpack = {
             },
         ],
     },
-    stats: {
-        warnings: false,
-    },
 };
 
 if (isProduction) {
-    webpack.plugins.push(new MyPlugin());
-    webpack.plugins.push(
+    umdConfig.plugins.push(new MyPlugin());
+    umdConfig.plugins.push(
         new MiniCssExtractPlugin({
             filename: 'jspreadsheet.css',
         })
     );
 }
 
-module.exports = webpack;
+const esmConfig = {
+    ...sharedConfig,
+    optimization: { minimize: false },
+    target: ['web', 'es2020'],
+    entry: './src/index',
+    mode: 'production',
+    experiments: {
+        outputModule: true,
+    },
+    externals: {
+        jsuites: 'jsuites',
+        '@jspreadsheet/formula': '@jspreadsheet/formula',
+    },
+    externalsType: 'module',
+    output: {
+        filename: 'index.esm.js',
+        path: distPath,
+        library: {
+            type: 'module',
+        },
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['css-loader'],
+            },
+        ],
+    },
+};
+
+module.exports = isProduction ? [umdConfig, esmConfig] : umdConfig;

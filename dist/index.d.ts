@@ -904,6 +904,8 @@ declare namespace jspreadsheet {
          * Worksheet settings.
          */
         worksheets: WorksheetOptions[];
+
+        contextMenuSubmenuOpenOn?: 'click' | 'hover';
     }
 
     interface WorksheetOptions {

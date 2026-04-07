@@ -171,6 +171,7 @@ factory.spreadsheet = async function (el, options, worksheets) {
         onclick: function () {
             spreadsheet.contextMenu.contextmenu.close(false);
         },
+        submenuOpenOn: spreadsheet.config.contextMenuSubmenuOpenOn,
     });
 
     // Fullscreen
