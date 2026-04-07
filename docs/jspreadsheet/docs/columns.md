@@ -32,6 +32,8 @@ Several events are available for handling column actions in your spreadsheet, in
 | `onbeforedeletecolumn`          | Triggered before a column is deleted. Return `false` to cancel the action.<br/>`onbeforedeletecolumn(instance: WorksheetInstance, removedColumns: number[]): undefined \| boolean;` |
 | `ondeletecolumn`                | Triggered after a column is deleted.<br/>`ondeletecolumn(instance: WorksheetInstance, removedColumns: number[]): void;`                                                       |
 | `onmovecolumn`                  | Triggered after a column is moved to a new position.<br/>`ondeletecolumn(instance: WorksheetInstance, removedColumns: number[]): void;`          |
+| `onhidecolumn`                  | Triggered after one or more columns are hidden.<br/>`onhidecolumn(instance: WorksheetInstance, columns: number[]): void;`                        |
+| `onshowcolumn`                  | Triggered after one or more columns are shown.<br/>`onshowcolumn(instance: WorksheetInstance, columns: number[]): void;`                         |
 
 ### Initial Settings
 

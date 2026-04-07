@@ -685,6 +685,8 @@ export const showColumn = function (colNumber) {
 
     updateHiddenColumnIndicators(obj);
     obj.resetSelection();
+
+    dispatch.call(obj, 'onshowcolumn', obj, colNumber);
 };
 
 /**
@@ -717,6 +719,8 @@ export const hideColumn = function (colNumber) {
 
     updateHiddenColumnIndicators(obj);
     obj.resetSelection();
+
+    dispatch.call(obj, 'onhidecolumn', obj, colNumber);
 };
 
 /**

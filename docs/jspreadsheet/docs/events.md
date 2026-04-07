@@ -42,6 +42,10 @@ Jspreadsheet provides a comprehensive event system designed to enhance integrati
 | `oneditionend`            | Triggered when `closeEditor` is called.                                                               |  
 | `onchangestyle`           | Triggered when `setStyle` is called.                                                                  |  
 | `onchangemeta`            | Triggered when `setMeta` is called.                                                                   |  
+| `onhidecolumn`            | Triggered after one or more columns are hidden.                                                       |  
+| `onshowcolumn`            | Triggered after one or more columns are shown.                                                        |  
+| `onhiderow`               | Triggered after one or more rows are hidden.                                                          |  
+| `onshowrow`               | Triggered after one or more rows are shown.                                                           |  
 
 
 ## Examples  

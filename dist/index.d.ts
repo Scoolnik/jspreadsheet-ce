@@ -823,6 +823,34 @@ declare namespace jspreadsheet {
         onresizecolumn?: (instance: WorksheetInstance, colIndex: number | number[], newWidth: number | number[], oldWidth: number | number[]) => void;
 
         /**
+         * Occurs after one or more columns are hidden.
+         * @param instance - Instance of the worksheet where the change occurred.
+         * @param columns - Indices of the hidden columns.
+         */
+        onhidecolumn?: (instance: WorksheetInstance, columns: number[]) => void;
+
+        /**
+         * Occurs after one or more columns are shown.
+         * @param instance - Instance of the worksheet where the change occurred.
+         * @param columns - Indices of the shown columns.
+         */
+        onshowcolumn?: (instance: WorksheetInstance, columns: number[]) => void;
+
+        /**
+         * Occurs after one or more rows are hidden.
+         * @param instance - Instance of the worksheet where the change occurred.
+         * @param rows - Indices of the hidden rows.
+         */
+        onhiderow?: (instance: WorksheetInstance, rows: number[]) => void;
+
+        /**
+         * Occurs after one or more rows are shown.
+         * @param instance - Instance of the worksheet where the change occurred.
+         * @param rows - Indices of the shown rows.
+         */
+        onshowrow?: (instance: WorksheetInstance, rows: number[]) => void;
+
+        /**
          * Occurs after a change in row height.
          * @param instance - Instance of the worksheet where the change occurred.
          * @param rowIndex - Index of row being resized.
@@ -1041,6 +1069,12 @@ declare namespace jspreadsheet {
          * Default row height.
          */
         defaultRowHeight?: number;
+
+        /**
+         * Width of the row header column in pixels.
+         * @default 50
+         */
+        rowHeaderWidth?: number | string;
 
         /**
          * Allow table edition.

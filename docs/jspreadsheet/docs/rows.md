@@ -33,6 +33,8 @@ The following events are related to rows in your spreadsheet.
 | `ondeleterow`       | Triggered after a row is deleted.<br/>`ondeleterow(worksheet: Object, rows: Number[]) => void`                                                                   |
 | `onmoverow`         | Triggered after a row is moved to a new position.<br/>`onmoverow(worksheet: Object, origin: Number, destination: Number) => void`                                 |
 | `onresizerow`       | Triggered after the height of one or more rows is changed.<br/>`onresizerow(worksheet: Object, row: Mixed, height: Mixed, oldHeight: Mixed) => void`             |
+| `onhiderow`         | Triggered after one or more rows are hidden.<br/>`onhiderow(worksheet: Object, rows: Number[]) => void`                                                         |
+| `onshowrow`         | Triggered after one or more rows are shown.<br/>`onshowrow(worksheet: Object, rows: Number[]) => void`                                                          |
 
  
 
@@ -48,6 +50,7 @@ The following row-related properties are available during spreadsheet initializa
 | `rowDrag: boolean`              | Enables the user to change the position of a row by dragging and dropping. `Default: true`   |
 | `rowResize: boolean`            | Allows the user to resize rows. `Default: true`                                              |
 | `defaultRowHeight: number`      | Sets the default row height.                                                                 |
+| `rowHeaderWidth: number`        | Sets the width of the row header column. `Default: 50`                                       |
 | `minSpareRows: number`          | Specifies the number of mandatory blank rows at the end of the spreadsheet. `Default: none.` |
 
 

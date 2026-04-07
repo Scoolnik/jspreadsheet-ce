@@ -6635,6 +6635,8 @@ const showColumn = function (colNumber) {
 
     updateHiddenColumnIndicators(obj);
     obj.resetSelection();
+
+    utils_dispatch.call(obj, 'onshowcolumn', obj, colNumber);
 };
 
 /**
@@ -6667,6 +6669,8 @@ const hideColumn = function (colNumber) {
 
     updateHiddenColumnIndicators(obj);
     obj.resetSelection();
+
+    utils_dispatch.call(obj, 'onhidecolumn', obj, colNumber);
 };
 
 /**
@@ -7308,6 +7312,8 @@ const showRow = function (rowNumber) {
     });
 
     updateHiddenRowIndicators(obj);
+
+    utils_dispatch.call(obj, 'onshowrow', obj, rowNumber);
 };
 
 /**
@@ -7325,6 +7331,8 @@ const hideRow = function (rowNumber) {
     });
 
     updateHiddenRowIndicators(obj);
+
+    utils_dispatch.call(obj, 'onhiderow', obj, rowNumber);
 };
 
 /**
@@ -10200,15 +10208,12 @@ const createTable = function () {
     obj.textarea.ariaHidden = 'true';
 
     // Powered by Jspreadsheet
-    const ads = document.createElement('a');
-    ads.setAttribute('href', 'https://bossanova.uk/jspreadsheet/');
     obj.ads = document.createElement('div');
     obj.ads.className = 'jss_about';
 
     const span = document.createElement('span');
     span.innerHTML = 'Jspreadsheet CE';
-    ads.appendChild(span);
-    obj.ads.appendChild(ads);
+    obj.ads.appendChild(span);
 
     // Create table container TODO: frozen columns
     const container = document.createElement('div');

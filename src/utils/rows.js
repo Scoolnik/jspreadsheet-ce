@@ -602,6 +602,8 @@ export const showRow = function (rowNumber) {
     });
 
     updateHiddenRowIndicators(obj);
+
+    dispatch.call(obj, 'onshowrow', obj, rowNumber);
 };
 
 /**
@@ -619,6 +621,8 @@ export const hideRow = function (rowNumber) {
     });
 
     updateHiddenRowIndicators(obj);
+
+    dispatch.call(obj, 'onhiderow', obj, rowNumber);
 };
 
 /**
