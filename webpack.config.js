@@ -1,16 +1,17 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 class MyPlugin {
     apply(compiler) {
         compiler.hooks.emit.tap('MyPlugin', (compilation) => {
-            // Get the bundled file name
-            const fileName = Object.keys(compilation.assets)[0];
+            const jsFiles = Object.keys(compilation.assets).filter((name) => name.endsWith('.js'));
 
-            // Get the bundled file content
-            const fileContent = compilation.assets[fileName].source();
+            jsFiles.forEach((fileName) => {
+                // Get the bundled file content
+                const fileContent = compilation.assets[fileName].source();
 
-            const header = `if (! jSuites && typeof(require) === 'function') {
+                const header = `if (! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
 }
 
@@ -24,17 +25,18 @@ if (! formula && typeof(require) === 'function') {
     global.jspreadsheet = factory();
 }(this, (function () {`;
 
-            const footer = `    return jspreadsheet;
+                const footer = `    return jspreadsheet;
 })));`;
 
-            // Updated file content with custom content added
-            const updatedFileContent = header + '\n\n' + fileContent + '\n\n' + footer;
+                // Updated file content with custom content added
+                const updatedFileContent = header + '\n\n' + fileContent + '\n\n' + footer;
 
-            // Replace the bundled file content with updated content
-            compilation.assets[fileName] = {
-                source: () => updatedFileContent,
-                size: () => updatedFileContent.length,
-            };
+                // Replace the bundled file content with updated content
+                compilation.assets[fileName] = {
+                    source: () => updatedFileContent,
+                    size: () => updatedFileContent.length,
+                };
+            });
         });
     }
 }
@@ -44,14 +46,17 @@ let isProduction = process.env.NODE_ENV === 'production';
 const distPath = path.resolve(__dirname, 'dist');
 
 const sharedConfig = {
-    stats: { warnings: false },
+    performance: {
+        maxAssetSize: 512 * 1024,
+        maxEntrypointSize: 512 * 1024,
+    },
 };
 
 const umdConfig = {
     ...sharedConfig,
     optimization: { minimize: true },
     target: ['web', 'es5'],
-    entry: isProduction ? './src/index' : './src/test.js',
+    entry: [isProduction ? './src/index' : './src/test.js'],
     mode: isProduction ? 'production' : 'development',
     externals: {},
     output: {
@@ -104,6 +109,20 @@ if (isProduction) {
             filename: 'jspreadsheet.css',
         })
     );
+    umdConfig.plugins.push(
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/jspreadsheet.css',
+                    to: 'jspreadsheet.css',
+                },
+                {
+                    from: 'src/jspreadsheet.themes.css',
+                    to: 'jspreadsheet.themes.css',
+                },
+            ],
+        })
+    );
 }
 
 const esmConfig = {
@@ -126,14 +145,6 @@ const esmConfig = {
         library: {
             type: 'module',
         },
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: ['css-loader'],
-            },
-        ],
     },
 };
 
