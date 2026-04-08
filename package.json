@@ -48,7 +48,7 @@
     ],
     "dependencies": {
         "@jspreadsheet/formula": "^2.0.2",
-        "jsuites": "^6.3.2"
+        "jsuites": "https://github.com/Scoolnik/jsuites"
     },
     "devDependencies": {
         "@babel/cli": "^7.7.4",
